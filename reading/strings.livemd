@@ -40,7 +40,7 @@ In the Elixir cell below, create a string "Hello, world!". This is a right of pa
 programmer.
 
 ```elixir
-
+"Hello, world!"
 ```
 
 ## String Operators
@@ -65,7 +65,7 @@ In the Elixir cell below, concatenate the string `"Hi!"` and the name of one of 
 as a string.
 
 ```elixir
-
+"Hi " <> "Ada " <> "!"
 ```
 
 ### String Interpolation
@@ -95,5 +95,5 @@ In the Elixir cell below, use **string interpolation** to say `I have (X - 1) cl
 X is the number of people in your cohort.
 
 ```elixir
-
+"I have #{1 - 1} classmates. :("
 ```

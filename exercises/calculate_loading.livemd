@@ -36,25 +36,25 @@ Given a user has completed task B and C, how many points do the have? Enter your
 answer in the Elixir cell below.
 
 ```elixir
-
+12 + 36
 ```
 
 Given a user has completed task C and D, how many points do they have?
 
 ```elixir
-
+36 + 32
 ```
 
 Given a user has completed task B, what percentage of completed tasks are they currently at?
 
 ```elixir
-
+12 / 88 * 100
 ```
 
 Given a user has completed task B and A, what is their percentage of possible points earned?
 
 ```elixir
-
+(12 + 8) / 88 * 100
 ```
 
 ### New Feature Added - Penalties
@@ -65,20 +65,20 @@ value is subtracted from your score.
 Given a user has completed task A, B, and C but not D, what is their score?
 
 ```elixir
-
+8 + 12 + 36 - 32 / 2
 ```
 
 Given a user has completed task B and C, but not A and D, what is their score?
 
 ```elixir
-
+12 + 36 - (8 + 32) / 2
 ```
 
 Given a user has completed task A and B, but not C and D, what is their total percentage of possible
 points earned?
 
 ```elixir
-
+(8 + 12 - (36 + 32) / 2) / 88 * 100
 ```
 
 ### New Feature Added - Rewards
@@ -91,34 +91,34 @@ that task.
 Given that a user completed task A early, and task B, C, and D on time, what is their score?
 
 ```elixir
-
+8 * 1.6 + 12 + 36 + 32
 ```
 
 Given that a user completed task A, B, C, and D early, what is their score?
 
 ```elixir
-
+(8 + 12 + 36 + 32) * 1.6
 ```
 
 Given that a user completed task A, B, C, and D early, what is their percentage score out of expected
 points (88)? (The answer will be above 100%)
 
 ```elixir
-
+(8 + 12 + 36 + 32) * 1.6 / 88 * 100
 ```
 
 Given that a user completed task C and B early, but did not complete task A or D, what 
 is their score?
 
 ```elixir
-
+(12 + 36) * 1.6 - (8 + 32) / 2
 ```
 
 Given that a user completed task A early, task B and C on time, but did not complete task D, 
 what is their percentage of the expected points (88) earned?
 
 ```elixir
-
+(12 * 1.6 + (12 + 36) - 32 / 2) / 88 * 100
 ```
 
 ### (BONUS): Add Your Own Feature

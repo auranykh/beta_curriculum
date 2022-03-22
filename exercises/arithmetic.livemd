@@ -162,101 +162,101 @@ In the Elixir cells below, enter the result of the equation. You should use
 Four plus 3 times 10.
 
 ```elixir
-
+4 + 3 * 10
 ```
 
 Ten times ten times ten.
 
 ```elixir
-
+10 * 10 * 10
 ```
 
 Ten to the power of two hundred and one.
 
 ```elixir
-
+10 ** 201
 ```
 
 Ten minus fourteen plus twelve.
 
 ```elixir
-
+10 - 14 + 12
 ```
 
 The remainder of 10 / 3.
 
 ```elixir
-
+rem(10, 3)
 ```
 
 200 divided by 3.
 
 ```elixir
-
+200 / 3
 ```
 
 Half of 214.
 
 ```elixir
-
+214 / 2
 ```
 
 75% of 456.
 
 ```elixir
-
+456 * 0.75
 ```
 
 Ten minus two times 5.
 
 ```elixir
-
+10 - 2 * 5
 ```
 
 (Ten minus two) times 5.
 
 ```elixir
-
+(10 - 2) * 5
 ```
 
 Divide 10 by 3.
 
 ```elixir
-
+10 / 3
 ```
 
 Use integer division to divide 10 by 3.
 
 ```elixir
-
+div(10, 3)
 ```
 
 Ten minus two times 10 to the power of 2.
 
 ```elixir
-
+10 - 2 * 10 ** 2
 ```
 
 Negative ten plus four.
 
 ```elixir
-
+-10 + 4
 ```
 
 Five plus negative six minus negative two.
 
 ```elixir
-
+5 + -6 - -2
 ```
 
 60 percent of 5 plus four.
 
 ```elixir
-
+(5 + 4) * 0.6
 ```
 
 Seventy divided by (ten plus two).
 
 ```elixir
-
+70 / (10 + 2)
 ```

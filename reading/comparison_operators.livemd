@@ -108,13 +108,13 @@ two equals signs instead of three `==`
 In the Elixir cell below, check if `10` is less than (`<`) `5`.
 
 ```elixir
-
+10 < 5
 ```
 
 In the Elixir cell below, check if `7` is greater than or equal (`>=`) to `7`.
 
 ```elixir
-
+7 >= 7
 ```
 
 In the form below, Enter the operator `==`, `===`, `>`, `<`, `>=`, or `<=`

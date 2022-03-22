@@ -149,7 +149,7 @@ you're using an unbound variable.
 In the Elixir cell below, create a variable `hello` and bind it to the value `"world"`
 
 ```elixir
-
+hello = "world"
 ```
 
 ### Mutation
