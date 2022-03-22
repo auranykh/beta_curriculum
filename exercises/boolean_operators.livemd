@@ -29,7 +29,7 @@ and --> false
 ```
 
 ```elixir
-
+true and false
 ```
 
 ```mermaid
@@ -40,7 +40,7 @@ or --> true
 ```
 
 ```elixir
-
+false or true
 ```
 
 ```mermaid
@@ -67,7 +67,7 @@ flowchart LR
 ```
 
 ```elixir
-
+true and not false
 ```
 
 ```mermaid
@@ -82,7 +82,7 @@ flowchart LR
 ```
 
 ```elixir
-
+true and true
 ```
 
 ```mermaid
@@ -98,7 +98,7 @@ flowchart LR
 ```
 
 ```elixir
-
+false or not true
 ```
 
 ```mermaid

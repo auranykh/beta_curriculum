@@ -9,7 +9,9 @@ In the Elixir cell below create a word guessing game.
 * Check that the `guess` matches the answer and return `"Correct!"` or return `"Incorrect."`
 
 ```elixir
-
+guess = "test"
+answer = "test"
+(guess === answer && "Correct!") || (guess != answer && "Incorrect.")
 ```
 
 ## Guess the Number
@@ -23,5 +25,9 @@ In the Elixir cell below create a number guessing game.
 * Check that the `guess` is greater than `answer` and return `"Too high!"`
 
 ```elixir
+guess = 5
+answer = 3
 
+(guess === answer && "Correct!") || (guess < answer && "Too low!") ||
+  (guess > answer && "Too high!")
 ```

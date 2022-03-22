@@ -11,7 +11,10 @@ You should only need to use `&&`, `=`, `===`, and `||` operators.
 * Handle if input equals `"Scissors"` then return `"Rock"`
 
 ```elixir
+input = "Paper"
 
+(input === "Rock" && "Paper") || (input === "Paper" && "Scissors") ||
+  (input === "Scissors" && "Rock")
 ```
 
 ## Create Two Player Rock Paper Scissors
@@ -24,5 +27,6 @@ only need to use the `&&`, `=`, `===`, and `||` operators.
 * Return who won in the format `"Rock beats Paper"` depending on which player won.
 
 ```elixir
-
+player1 = "Rock"
+player2 = "Paper"
 ```
