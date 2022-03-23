@@ -1,9 +1,5 @@
 # Arithmetic
 
-## Navigation
-
-[Return Home](../start.livemd)
-
 ## Setup
 
 Ensure you run the `ea` command to evaluate all Elixir cells before starting. Alternatively,
@@ -274,7 +270,7 @@ In the Elixir cell below, subtract two massive numbers together.
 ## Multiplication
 
 Computers can efficiently multiply numbers. Under the hood, multiplication is just
-repeated addition. For example, `5 * 5` is `5 + 5 + 5 + 5 + 5`.
+repeated additon. For example, `5 * 5` is `5 + 5 + 5 + 5 + 5`.
 
 ```elixir
 10 * 10
