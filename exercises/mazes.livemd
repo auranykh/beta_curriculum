@@ -19,7 +19,7 @@ Mix.install([
 
 ```elixir
 string_maze = Utils.get(:string_maze)
-string_maze = Utils.get(:atom_maze)
+atom_maze = Utils.get(:atom_maze)
 ```
 
 ## Navigate The Maze
@@ -44,7 +44,11 @@ The maze is in a `string_maze` variable.
 ![](images/string_maze_small.png)
 
 ```elixir
-string_maze
+string_maze[:south][:east][:north][:east][:south][:west][:north][:east][:south][:east][:north][
+  :west
+][:south][:west][:south][:west][:north][:west][:south][:west][:south][:west][:south][:east][
+  :north
+][:east][:south][:east][:south]
 ```
 
 ## The Atom Maze
@@ -57,7 +61,7 @@ in a `atom_maze` variable.
 ![](images/atom_maze.png)
 
 ```elixir
-atom_maze
+atom_maze.south.east.north.east.south.west.north.east.south.east.north.west.south.west.south.west.north.west.south.west.south.west.south.east.north.east.south.east.south
 ```
 
 ## Create Your Own String Maze

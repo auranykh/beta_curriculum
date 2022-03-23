@@ -1,5 +1,7 @@
 # Tuples
 
+## Section
+
 Tuples are fixed size containers for multiple elements. 
 Like lists they can contain any data type.
 
@@ -30,5 +32,5 @@ In the Elixir cell below, create a tuple with `:ok` as the first element, and `"
 the second element.
 
 ```elixir
-
+{:ok, "got it!"}
 ```

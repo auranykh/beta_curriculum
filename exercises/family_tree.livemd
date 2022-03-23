@@ -87,5 +87,11 @@ classDiagram
 ```
 
 ```elixir
-
+han = %{name: "Han", status: :grandparent, age: 81, parents: []}
+leia = %{name: "Leia", status: :grandparent, age: 82, parents: []}
+bob = %{name: "Bob", status: :grandparent, age: 68, parents: []}
+bridget = %{name: "Bridget", status: :grandparent, age: 70, parents: []}
+uther = %{name: "Uther", status: :parent, age: 56, parents: [han, leia]}
+ygraine = %{name: "Ygraine", status: :parent, age: 45, parents: [bob, bridget]}
+arthur = %{name: "Arthur", status: :child, age: 22, parents: [uther, ygraine]}
 ```

@@ -57,19 +57,19 @@ though, not a colon `:`. `=>` is an equals sign `=` and a greater than symbol `>
 In the Elixir cell below, create a map with string keys and any value.
 
 ```elixir
-
+%{"key1" => "value", "key2" => "value2"}
 ```
 
 Create a map with atom keys and any value.
 
 ```elixir
-
+%{key1: "Value1", key2: "value2"}
 ```
 
 Create a map with a non-string or atom key and any value.
 
 ```elixir
-
+%{1 => "one"}
 ```
 
 ## Manipulating Maps
@@ -126,21 +126,25 @@ map["non_existing_key"]
 In the Elixir cell below, retrieve the value of `:example` using both **map[key]** and **map.key** notation.
 
 ```elixir
-%{example: "value"}
+map = %{example: "value"}
+map[:example]
+map.example
 ```
 
 Create a map `%{hello: "world"}` and bind it to a variable `map`. Use **map.key** notation
 to access the `:hello` key. The cell should output `"world"`
 
 ```elixir
-
+map = %{hello: "world"}
+map.hello
 ```
 
 Create a map `%{"one" =>  1}` and bind it to a variable `map`. Use **map[key]** syntax to access
 the key `"one"`. It should return `1`.
 
 ```elixir
-
+map = %{"one" => 1}
+map["one"]
 ```
 
 ### Updating Maps

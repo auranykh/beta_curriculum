@@ -31,6 +31,10 @@ In the Elixir cells below, use `++` and `--` to add the items show.
 
 ```elixir
 shopping_cart = []
+shopping_cart = shopping_cart ++ ["grapes", "walnuts", "apples"]
+shopping_cart = shopping_cart ++ ["blueberries", "chocolate", "pizza"]
+shopping_cart = shopping_cart -- ["grapes", "walnuts"]
+shopping_cart = shopping_cart ++ ["banana", "banana", "banana"]
 ```
 
 ## Text Shopping List With Quantities
@@ -48,4 +52,9 @@ items from the `shopping_cart`
 
 ```elixir
 shopping_cart = []
+shopping_cart = shopping_cart ++ [{"milk", 1}, {"eggs", 12}]
+shopping_cart = shopping_cart ++ [{"bars of butter", 2}, {"candies", 10}]
+shopping_cart = shopping_cart -- [{"bars of butter", 2}]
+shopping_cart = shopping_cart
+shopping_cart = shopping_cart ++ [{"candies", 5}]
 ```
