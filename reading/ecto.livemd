@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ecto
 
 ## Setup
@@ -49,3 +50,60 @@ defmodule Test do
   end
 end
 ```
+=======
+# Ecto
+
+## Navigation
+
+[Return Home](../start.livemd)
+
+## Setup
+
+Ensure you run the `ea` command to evaluate all Elixir cells before starting. Alternatively,
+you can evaluate the Elixir cells as you read.
+
+```elixir
+Mix.install([
+  {:kino, github: "livebook-dev/kino", override: true},
+  {:kino_lab, "~> 0.1.0-dev", github: "jonatanklosko/kino_lab"},
+  {:vega_lite, "~> 0.1.3"},
+  {:benchee, "~> 0.1"},
+  {:ecto, "~> 3.7"},
+  {:math, "~> 0.7.0"},
+  {:utils, path: "utils"}
+])
+```
+
+
+```elixir
+defmodule Sample.Weather do
+  use Ecto.Schema
+
+  schema "weather" do
+    field(:temp_lo, :integer)
+    field(:temp_hi, :integer)
+    field(:prcp, :float, default: 0.0)
+  end
+end
+
+w = %Sample.Weather{temp_hi: 2, temp_lo: 2}
+
+File.write("delete_this_brooklin", :erlang.term_to_binary(Map.from_struct(w)))
+
+File.read!("delete_this_brooklin") |> :erlang.binary_to_term()
+```
+
+```elixir
+defmodule Test do
+  import Ecto.Query, only: [from: 2]
+
+  def test do
+    query =
+      from(u in "users",
+        where: u.age > 18 or is_nil(u.email),
+        select: u
+      )
+  end
+end
+```
+>>>>>>> Main

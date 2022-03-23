@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Performance
 
 ## Setup
@@ -571,3 +572,582 @@ You should notice the list is faster this time, or at least about the same speed
 ```elixir
 
 ```
+=======
+# Performance
+
+## Navigation
+
+[Return Home](../start.livemd)
+
+## Setup
+
+Ensure you run the `ea` command to evaluate all Elixir cells before starting. Alternatively,
+you can evaluate the Elixir cells as you read.
+
+```elixir
+Mix.install([
+  {:kino, github: "livebook-dev/kino", override: true},
+  {:kino_lab, "~> 0.1.0-dev", github: "jonatanklosko/kino_lab"},
+  {:vega_lite, "~> 0.1.3"},
+  {:benchee, "~> 0.1"},
+  {:ecto, "~> 3.7"},
+  {:math, "~> 0.7.0"},
+  {:utils, path: "utils"}
+])
+```
+
+```elixir
+
+```
+
+<!-- livebook:{"branch_parent_index":0} -->
+
+## Performance Concerns
+
+Computers are composed of several parts. As programmers, we are primarily concerned about
+ the **processor**, and the **memory**.
+
+The processor determines the computer's speed when performing calculations.
+
+Memory or **RAM** (random access memory) is measured in GB (Gigabytes) and is the amount of data
+we can store during a calculation.
+
+In software terms, this translates to the **speed** and **memory consumption** of our program. Generally
+as you build software, those are your main performance concerns.
+
+While computers are incredibly fast, they do have limits. Certain calculations take time to complete.
+So, we need to be mindful of how to optimize our programs to operate efficiently.
+
+For example, this statement may take some time.
+
+```elixir
+Enum.map(1..10_000_000, fn each -> each + 2 end)
+```
+
+## Big O Notation
+
+As programmers, we are generally more concerned with how performance grows in our
+program as data becomes larger.
+
+We use **Big $$O$$ Notation** to communicate about how performance changes based on the size
+of the data.
+
+* **$$O(1)$$**: Constant Time
+* **$$O(log (n))$$**: Logarithmic Time
+* **$$O(n)$$**: Linear Time
+* **$$O(n^2)$$**: Quadratic Time (Polonomial Time)
+* **$$O(2^n)$$**: Exponential Time
+* **$$O(n!)$$**: Factorial Time
+
+```elixir
+Utils.graph(:big_o_notation)
+```
+
+As you work with larger amounts of data, different big $O$ complexities grow faster than others.
+See the graph below for a general ranking.
+
+<!-- livebook:{"break_markdown":true} -->
+
+![](images/big_o_notation_graph.png)
+
+<!-- livebook:{"break_markdown":true} -->
+
+We should try to be aware of the performance costs and memory costs of both the
+code that your write, and the built-in functionality you use, especially when working with large
+amounts of data.
+
+This will inspire both how you write code, and which data structures you choose for particular situations.
+
+## Constant Complexity
+
+Did you know that a [carrier pigeon can be faster than the internet](https://www.bbc.com/news/technology-11325452)?
+It's true, and it's related to the nature of constant growth.
+
+Some operations take the same amount of time to execute no matter how much data is involved.
+For example, a pigeon will travel some distance of kilometers in approximately the same time
+every attempt. If you strap a USB stick to the pigeon, it can carry (within reason) any
+amount of data to it's destination in a constant amount of time.
+
+So a while it makes a great headline about slow internet speed, it's actually a
+mathematical guarantee that for some size of data, a pigeon will be faster than the internet.
+
+We can see the nature of how a constant travel time for some amount of data always intersects with the 
+expected internet speed in the graph below.
+
+```elixir
+Utils.graph(:pigeon_beats_internet)
+```
+
+## Linear Complexity
+
+Linear growth adds the same number of calculations for each element in the collection.
+For example, reading a book would (assuming a consistent reading speed) be linear complexity.
+If you take two minutes to read every page, you add an additional two minute for every page.
+
+* With 1 page it takes 2 minute
+* With 2 pages it takes 4 minutes
+* With 3 pages it takes 6 minutes
+* With 4 pages it takes 8 minutes
+
+In programming terms, for each additional item added to the collection, the computer needs to
+perform approximately the same number of additional calculations.
+
+Plotted onto a graph you would expect that as we increase the number of elements, time grows in a constant line upward.
+
+```elixir
+Utils.graph(:linear_complexity)
+```
+
+## Polynomial Complexity
+
+Rather than grow linearly, polynomial complexity grows to some power.
+For example, nested loops typically result in polynomial complexity.
+
+That's because for every element in the first enumerable, we enumerate through every element in
+the second enumerable.
+
+```mermaid
+flowchart
+A[1] --> B[1]
+A[1] --> C[2]
+A[1] --> D[3]
+
+A1[2] --> B1[1]
+A1[2] --> C1[2]
+A1[2] --> D1[3]
+
+A2[3] --> B2[1]
+A2[3] --> C2[2]
+A2[3] --> D2[3]
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Your Turn
+
+Try changing `number` to `2`, `3`, and `4`. Notice how it creates more lists, with more
+elements for each increase in number.
+
+```elixir
+number = 1
+
+Enum.map(1..number, fn _ ->
+  Enum.to_list(1..number)
+end)
+```
+
+* With 1 element it creates 1 element
+* With 2 elements it creates 4 elements
+* With 3 elements it creates 9 elements
+* With 4 elements it creates 12 elements
+
+In other words, it creates $n^2$ elements. We can see how this grows in the following table.
+
+```elixir
+Utils.table(:n2)
+```
+
+If you nest a third enumeration it becomes $n^3$.
+
+<!-- livebook:{"break_markdown":true} -->
+
+```mermaid
+flowchart
+A1[1]
+
+A11[1]
+A12[2]
+A13[3]
+
+A1 --> A11
+A1 --> A12
+A1 --> A13
+
+A111[1]
+A112[2]
+A113[3]
+
+A11 --> A111
+A11 --> A112
+A11 --> A113
+
+A121[1]
+A122[2]
+A123[3]
+
+A12 --> A121
+A12 --> A122
+A12 --> A123
+
+A131[1]
+A132[2]
+A133[3]
+
+A13 --> A131
+A13 --> A132
+A13 --> A133
+
+B1[1]
+
+B11[1]
+B12[2]
+B13[3]
+
+B1 --> B11
+B1 --> B12
+B1 --> B13
+
+B111[1]
+B112[2]
+B113[3]
+
+B11 --> B111
+B11 --> B112
+B11 --> B113
+
+B121[1]
+B122[2]
+B123[3]
+
+B12 --> B121
+B12 --> B122
+B12 --> B123
+
+B131[1]
+B132[2]
+B133[3]
+
+B13 --> B131
+B13 --> B132
+B13 --> B133
+
+C1[1]
+
+C11[1]
+C12[2]
+C13[3]
+
+C1 --> C11
+C1 --> C12
+C1 --> C13
+
+C111[1]
+C112[2]
+C113[3]
+
+C11 --> C111
+C11 --> C112
+C11 --> C113
+
+C121[1]
+C122[2]
+C123[3]
+
+C12 --> C121
+C12 --> C122
+C12 --> C123
+
+C131[1]
+C132[2]
+C133[3]
+
+C13 --> C131
+C13 --> C132
+C13 --> C133
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Your Turn
+
+Try changing `number` to `2`, `3`, and `4`. Notice how it creates $n^3$ elements.
+
+```elixir
+number = 3
+
+Enum.map(1..number, fn _ ->
+  Enum.map(1..number, fn _ ->
+    Enum.to_list(1..number)
+  end)
+end)
+```
+
+We can see how $n^3$ grows in the following table.
+
+```elixir
+Utils.table(:n3)
+```
+
+Plotted onto a graph, we can see that polynomial complexity results in an upward curve, and
+the size of the power significantly increases the growth.
+
+```elixir
+Utils.graph(:polynomial_complexity)
+```
+
+## Exponential Complexity
+
+In exponential growth, some constant grows by an additional power for each element added to the collection.
+
+Let's take cracking a password as an example. We can assume a password can only be made from
+integers `0` to `9`.
+
+```mermaid
+flowchart LR
+0---1---2---3---4---5---6---7---8---9
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+As the number of digits in the password increases, the number of combinations grows by a power
+of `2`.
+
+* With 1 digit it makes 10 attempts
+* With 2 digits it makes 100 attempts
+* With 3 digits it makes 1000 attempts
+* With 4 digits it makes 10000 attempts
+
+In other words, it executes $$10^n$$ attempts. Now often you'll see exponential complexity
+represented as $2^n$  or $C^n$ where `2` or `C` represents some constant value. In the case of a password cracker, it would
+be `10`.
+
+```elixir
+Utils.table(:exponential_growth)
+```
+
+```elixir
+Utils.graph(:exponential_complexity)
+```
+
+## Factorial Complexity
+
+Certain functions enumerate through every possible permutation of
+the input. As you can imagine this is computationally expensive. for each element, the function needs to
+enumerate through every remaining element.
+
+For example, if you needed to calculate every permutation of a number, that would require
+a factorial function.
+
+<!-- livebook:{"break_markdown":true} -->
+
+```mermaid
+flowchart
+  a[123]
+  a --> b[1]
+  a --> c[2]
+  a --> d[3]
+  b --> b1[2] --> 123
+  b --> b2[3] --> 132
+  c --> c1[1] --> 213
+  c --> c2[3] --> 231
+  d --> d1[1] --> 312
+  d --> d2[2] --> 321
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Your Turn
+
+Try adding elements to the `list` and notice how it creates $n!$ permutations of the list.
+
+```elixir
+defmodule Permutations do
+  def of([]) do
+    [[]]
+  end
+
+  def of(list) do
+    for h <- list, t <- of(list -- [h]), do: [h | t]
+  end
+end
+
+list = [1, 2, 3]
+Permutations.of(list)
+```
+
+* With 1 element it creates 1 permutation
+* With 2 elements it creates 2 permutations
+* With 3 elements it creates 6 permutations
+* With 4 elements it creates 24 permutations
+* With 5 elements it creates 120 permutations
+
+In other words, it creates $$n!$$ permutations. where $n!$ is a shorthand for
+
+$n! = n * (n-1) * (n-2) * ... * 1$
+
+For example $5!$ is $5 * 4 * 3 * 2 * 1$.
+
+<!-- livebook:{"break_markdown":true} -->
+
+Factorial complexity grows incredibly fast, as you can see according to this graph and corresponding
+data table.
+
+```elixir
+Utils.graph(:factorial_complexity)
+```
+
+```elixir
+Utils.table(:factorial_complexity)
+```
+
+<!-- livebook:{"branch_parent_index":2} -->
+
+## Measuring Performance
+
+Big $O$ Notation allows us to reason about how processing speed and memory consuption will grow
+given larger data sets for a calculation.
+
+This is useful for theorizing about performance. In practice, it's best to test your assumptions.
+By testing performance, we can avoid pre-optimizing code before it's necessary. We can also know which
+pieces of code cost the most.
+
+There's a wide variety of tools for measuring and monitoring performance. We'll focus on
+benchmarking time and memory consumption for now.
+
+### :timer.tc/1
+
+Out of the box, Erlang provides a `:timer` library which contains a `tc/1` function to measure the time it takes to run a function.
+It returns a `{time, result}` tuple.
+
+```mermaid
+flowchart LR
+Function --> timer[:timer.tc/1] --> return["{timer, result}"]
+```
+
+```elixir
+:timer.tc(fn -> 10000 ** 10000 - 10000 ** 10000 + 1 end)
+```
+
+The `time` returned is measured in microseconds.
+
+`1000` microseconds equals `1` millisecond.
+`1000` milliseconds equals `1` seconds.
+
+So you can get the number of milliseconds the function takes to run by dividing the result by `1000`
+
+```elixir
+{time, _result} = :timer.tc(fn -> 10000 ** 10000 - 10000 ** 10000 + 1 end)
+milliseconds = time / 1000
+```
+
+And the number of seconds by dividing once again by `1000`.
+
+```elixir
+seconds = milliseconds / 1000
+```
+
+### Your Turn
+
+In the Elixir cell below, use `:timer.tc/1` to measure an operation that takes more than 5 seconds.
+
+```elixir
+
+```
+
+### Benchee
+
+[Benchee](https://github.com/bencheeorg/benchee)
+is a popular library for measuring performance and memory consumption.
+
+External libraries need to be installed to use them.
+
+We use [Mix](https://hexdocs.pm/mix/1.13/Mix.html) to install Benchee.
+
+Mix is a build tool that provides tasks for creating, compiling, and testing Elixir projects, managing its dependencies, and more.
+
+<!-- livebook:{"break_markdown":true} -->
+
+```mermaid
+flowchart LR
+Benchee
+D[Dependencies]
+I[install/2]
+Mix
+Mix --> I
+I --> D
+D --> Benchee
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+You'll learn more about Mix in future lessons. For now, it's enough to be aware that you won't be able 
+to use the Benchee library unless it's installed.
+
+We've installed Benchee for you for this lesson, but don't be surprised if you try to use Benchee in
+other lessons and it isn't installed.
+
+We can use the `Benchee.run/2` function to measure the performance and memory consumption of some code.
+
+```elixir
+Benchee.run(%{
+  "example test" => fn -> 10000 ** 10000 end
+})
+```
+
+Above, the most imporant part of the output should look like the following, but with different numbers.
+
+```
+Name                   ips        average  deviation         median         99th %
+example test        154.65        6.47 ms    ±26.50%        6.13 ms       13.17 ms
+
+Memory usage statistics:
+
+Name            Memory usage
+example test           600 B
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+The Benchee documentation explains how to read the output:
+
+> * average - average execution time/memory usage (the lower the better)
+> * ips - iterations per second, aka how often can the given function be executed within one second (the higher the better - good for graphing), only for run times
+> * deviation - standard deviation (how much do the results vary), given as a percentage of the average (raw absolute values also available)
+> * median - when all measured values are sorted, this is the middle value. More stable than the average and somewhat more likely to be a typical value you see, for the most typical value see mode. (the lower the better)
+> * 99th % - 99th percentile, 99% of all measured values are less than this - worst case performance-ish
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Using Benchee For Comparison
+
+let's use Benchee to compare tuples and lists. Tuples are intended to be used as fixed-sized
+containers that are fast for accessing. Lists are collections intended for dynamic sized containers that get modified.
+
+Therefore, lists should be slow to access, and tuples should be fast to access. That's in theory, let's
+verify our assumption and prove it to be true.
+
+```elixir
+size = 10000
+large_list = Enum.to_list(0..size)
+large_tuple = List.to_tuple(large_list)
+
+Benchee.run(%{
+  "list" => fn -> Enum.at(large_list, size) end,
+  "tuple" => fn -> elem(large_tuple, size) end
+})
+```
+
+Upon running the above, you should see an output similar to the following. You'll notice that
+accessing a list was far slower!
+
+```
+Name            ips        average  deviation         median         99th %
+tuple        1.09 M        0.92 μs  ±2806.65%        0.80 μs           2 μs
+list       0.0324 M       30.89 μs    ±93.31%       28.90 μs       67.80 μs
+
+Comparison: 
+tuple        1.09 M
+list       0.0324 M - 33.58x slower +29.97 μs
+```
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Your Turn
+
+Use Benchee to compare accessing the **first** element instead of the last element as we already did above.
+You should notice the list is faster this time, or at least about the same speed. You'll learn why in a future lesson.
+
+```elixir
+
+```
+>>>>>>> Main

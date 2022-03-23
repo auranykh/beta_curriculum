@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Voter Count
 
 ## Voter Count
@@ -28,4 +29,40 @@ VoterCount.count([:dogs, :dogs, :dogs, :cats], :birds)
 
 ```elixir
 
+=======
+# Voter Count
+
+## Navigation
+
+[Return Home](../start.livemd)
+
+## Voter Count
+
+You're creating a system for counting votes.
+
+## Count Votes
+
+In the Elixir cell below,
+
+* Create a module `VoterCount` with a `count/2` function.
+* `count/2` should accept a list of atoms that represent votes, and an atom.
+* `count/2` should return an **integer** with the 
+  number of votes in the first parameter list that match the second parameter atom
+
+For example:
+
+```elixir
+VoterCount.count([:dogs, :dogs, :dogs, :cats], :dogs)
+3
+
+VoterCount.count([:dogs, :dogs, :dogs, :cats], :cats)
+1
+
+VoterCount.count([:dogs, :dogs, :dogs, :cats], :birds)
+0
+```
+
+```elixir
+
+>>>>>>> Main
 ```
